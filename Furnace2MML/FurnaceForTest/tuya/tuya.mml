@@ -1,0 +1,360 @@
+; Converted with FurnaceCommandStream2MML
+
+#Title		魔法少女たちの百年通夜
+#Composer	毛玉の地下基地
+#Arranger	asdf49514
+#Tempo		100
+#Option		/v/c
+#Filename	.M2
+#Zenlen		192
+#Volumedown	F18
+
+
+@000 4 7
+; AR DR SR RR SL  TL KS ML DT AMS	Octave Piano
+  28 00 08 00 03 035 02 03 03 00
+  26 10 07 06 02 000 01 01 03 00
+  28 00 08 00 03 033 02 03 07 00
+  26 10 07 06 02 000 01 01 07 00
+@001 4 3
+; AR DR SR RR SL  TL KS ML DT AMS	String
+  18 00 03 09 07 033 00 02 06 00
+  12 00 18 08 10 011 00 02 06 00
+  18 00 03 09 02 033 00 02 00 00
+  12 00 18 08 08 012 00 02 06 00
+@002 2 6
+; AR DR SR RR SL  TL KS ML DT AMS	Bass
+  22 09 00 15 00 035 00 00 06 00
+  22 14 00 15 04 022 00 02 00 00
+  25 09 00 15 00 042 00 02 00 00
+  25 06 00 15 15 007 00 00 06 00
+@003 4 0
+; AR DR SR RR SL  TL KS ML DT AMS	Vibraphone
+  31 14 06 11 10 045 00 05 03 00
+  31 13 16 11 15 010 00 04 03 00
+  31 10 00 01 11 080 00 05 03 00
+  31 10 00 08 15 004 00 01 03 00
+@004 0 4
+; AR DR SR RR SL  TL KS ML DT AMS	Instrument 4
+  31 08 00 03 15 042 00 05 05 00
+  00 00 00 00 00 000 00 00 00 00
+  31 04 00 01 11 048 00 01 05 00
+  00 00 00 00 00 000 00 00 00 00
+@005 0 4
+; AR DR SR RR SL  TL KS ML DT AMS	Instrument 5
+  31 08 00 03 15 042 00 05 05 00
+  00 00 00 00 00 000 00 00 00 00
+  31 04 00 01 11 048 00 01 05 00
+  00 00 00 00 00 000 00 00 00 00
+@006 0 4
+; AR DR SR RR SL  TL KS ML DT AMS	Instrument 6
+  31 08 00 03 15 042 00 05 05 00
+  00 00 00 00 00 000 00 00 00 00
+  31 04 00 01 11 048 00 01 05 00
+  00 00 00 00 00 000 00 00 00 00
+@007 0 4
+; AR DR SR RR SL  TL KS ML DT AMS	Instrument 7
+  31 08 00 03 15 042 00 05 05 00
+  00 00 00 00 00 000 00 00 00 00
+  31 04 00 01 11 048 00 01 05 00
+  00 00 00 00 00 000 00 00 00 00
+@008 0 4
+; AR DR SR RR SL  TL KS ML DT AMS	Instrument 8
+  31 08 00 03 15 042 00 05 05 00
+  00 00 00 00 00 000 00 00 00 00
+  31 04 00 01 11 048 00 01 05 00
+  00 00 00 00 00 000 00 00 00 00
+@009 0 4
+; AR DR SR RR SL  TL KS ML DT AMS	Instrument 9
+  31 08 00 03 15 042 00 05 05 00
+  00 00 00 00 00 000 00 00 00 00
+  31 04 00 01 11 048 00 01 05 00
+  00 00 00 00 00 000 00 00 00 00
+
+
+;;; 00[000] (0~6 Tick)
+A	o3 l16   r
+B	o3 l16   r
+C	o4 l16   r
+D	o6 l16   r
+E	o6 l16   r
+F	o3 l16   r
+G	o4 l16   r
+H	o5 l16   r
+R0	l16   r
+K	R0
+
+
+;;; 01[001] (6~198 Tick)
+A	l1   @0V115cc
+B	l1   @0V115gg
+C	l1   @0V115cc
+D	r1&1
+E	r1&1
+F	r1&1
+G	r1&1
+H	r1&1
+R1	r1&1
+K	R1
+
+
+;;; 02[002] (198~390 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc
+D	l8   @1V114c4<a+>c4<a+>cdd+<g>d<g>c2
+E	r1&1
+F	r1&1
+G	r1&1
+H	r1&1
+R2	r1&1
+K	R2
+
+
+;;; 03[003] (390~582 Tick)
+A	l1   cc
+B	l1   g+g+
+C	l1   cc
+D	l8   c<a+ga+f2fd+cd+g2
+E	r1&1
+F	r1&1
+G	r1&1
+H	r1&1
+R3	r1&1
+K	R3
+
+
+;;; 04[004] (582~774 Tick)
+A	l1   d+d+
+B	l1   g+g+
+C	l1   cc
+D	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+E	r1&1
+F	r1&1
+G	r1&1
+H	r1&1
+R4	r1&1
+K	R4
+
+
+;;; 05[005] (774~966 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc
+D	l8   c<a+ga+>fgd<a+>c1
+E	r1&1
+F	l8   r1&1
+G	r1&1
+H	r1&1
+R5	r1&1
+K	R5
+
+
+;;; 06[006] (966~1158 Tick)
+A	l1   d+d+
+B	l1   g+g+
+C	l1   cc
+D	l8   V114c4<a+>c4<a+>cdd+<g>d<g>c2
+E	r1&1
+F	l8   r@2V124g+rg+rg+rg+rg+rg+rg+rg+
+G	r1&1
+H	r1&1
+R6	l16   @512c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R6
+
+
+;;; 07[007] (1158~1350 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc
+D	l8   c<a+ga+f2fd+cd+g2
+E	r1&1
+F	l8   r>crcrcrcrcrcrcrc
+G	r1&1
+H	r1&1
+R7	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R7
+
+
+;;; 08[008] (1350~1542 Tick)
+A	l1   d+d+
+B	l1   g+g+
+C	l1   cc
+D	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+E	r1&1
+F	l8   rV124<g+rg+rg+rg+rg+rg+rg+rg+
+G	r1&1
+H	r1&1
+R8	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R8
+
+
+;;; 09[009] (1542~1734 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc
+D	l8   c<a+ga+>fgd<a+>c1
+E	r1&1
+F	l8   r>crcrcrcrcrcrcrc
+G	l8   r1&8@9V9cdd+fga+b
+H	r1&1
+R9	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R9
+
+
+;;; 0A[010] (1734~1926 Tick)
+A	l1   d+d+
+B	l1   g+g+
+C	l1   cc
+D	l8   V114c4<a+>c4<a+>cdd+<g>d<g>c2
+E	r1&1
+F	l8   rV124<g+rg+rg+rg+rg+rg+rg+rg+
+G	l8   >c4<a+>c4<a+>cdd+<g>d<g>c2
+H	r1&1
+R10	l16   @512c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R10
+
+
+;;; 0B[011] (1926~2118 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc
+D	l8   c<a+ga+f2fd+cd+g2
+E	r1&1
+F	l8   r>crcrcrcrcrcrcrc
+G	l8   c<a+ga+f2fd+cd+g2
+H	r1&1
+R11	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R11
+
+
+;;; 0C[012] (2118~2310 Tick)
+A	l1   d+d+
+B	l1   g+g+
+C	l1   cc
+D	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+E	r1&1
+F	l8   rV124<g+rg+rg+rg+rg+rg+rg+rg+
+G	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+H	r1&1
+R12	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R12
+
+
+;;; 0D[013] (2310~2502 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc
+D	l8   c<a+ga+>fgd<a+>c1
+E	r1&1
+F	l8   r>crcrcrcrcrcrcrc
+G	l8   c<a+ga+>fgd<a+>c1
+H	r1&1
+R13	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R13
+
+
+;;; 0E[014] (2502~2694 Tick)
+A	l1   d+d+
+B	l1   g+g+
+C	l1   cc
+D	l8   V114c4<a+>c4<a+>cdd+<g>d<g>c2
+E	r1&1
+F	l8   rV124<g+rg+rg+rg+rg+rg+rg+rg+
+G	l8   c4<a+>c4<a+>cdd+<g>d<g>c2
+H	l8   @9V9d+4dd+4dd+fg<a+>f<a+>d+2
+R14	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R14
+
+
+;;; 0F[015] (2694~2886 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc
+D	l8   c<a+ga+f2fd+cd+g2
+E	r1&1
+F	l8   r>crcrcrcrcrcrcrc
+G	l8   c<a+ga+f2fd+cd+g2
+H	l8   d+d<a+>d<a+2a+g+fg+a+2
+R15	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R15
+
+
+;;; 10[016] (2886~3078 Tick)
+A	l1   d+d+
+B	l1   g+g+
+C	l1   cc
+D	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+E	r1&1
+F	l8   rV124<g+rg+rg+rg+rg+rg+rg+rg+
+G	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+H	l8   >c4<a+>c4<a+>cdd+<a+>f<a+>g2
+R16	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R16
+
+
+;;; 11[017] (3078~3270 Tick)
+A	l1   V115cc
+B	l1   V115gg
+C	l1   V115cc&48
+D	l8   c<a+ga+>fgd<a+>c1
+E	r1&1
+F	l8   r>crcrcrcrcrcrcrc
+G	l8   c<a+ga+>fgd<a+>c1
+H	l8   d+dcddffdd+1
+R17	l16   @129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@256c8@129c@128c@256c8@130c@128c@256c@1c@128cc@257c8@130c@128c@257c8
+K	R17
+
+
+;;; 12[018] (3270~3462 Tick)
+A	l8   @3V105>>>>c4<a+>c4<a+>cdd+<g>d<g>c2
+B	l8   @3r48>>>>c4<a+>c4<a+>cdd+<g>d<g>c2
+C	l8   @3>>>>c4<a+>c4<a+>cdd+<g>d<g>c2
+D	V101d+1&1&1&1&1&1
+E	@1V101g+1&1
+F	@1V101>>>c1&1&1&1&1&1&1&1
+G	r1&1
+H	r1&1
+R18	@512c1&1
+K	R18
+
+
+;;; 13[019] (3462~3654 Tick)
+A	l8   c<a+ga+f2fd+cd+g2
+B	l8   c<a+ga+f2fd+cd+g2
+C	l8   c<a+ga+f2fd+cd+g2
+D	
+E	g1&1
+F	
+G	r1&1
+H	r1&1
+R19	r1&1
+K	R19
+
+
+;;; 14[020] (3654~3846 Tick)
+A	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+B	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+C	l8   g+4gg+4gg+a+>c<g>d<g>d+2
+D	
+E	V101g+1&1
+F	
+G	r1&1
+H	r1&1
+R20	r1&1
+K	R20
+
+
+;;; 15[021] (3846~4038 Tick)
+A	l8   c<a+ga+>fgd<a+>c1
+B	l8   c<a+ga+>fgd<a+>c2...&24
+C	l8   c<a+ga+>fgd<a+>c2...&24
+D	g1&1
+E	>d+1&1
+F	
+G	r1&1
+H	r1&1
+R21	r1&1
+K	R21
+
+
