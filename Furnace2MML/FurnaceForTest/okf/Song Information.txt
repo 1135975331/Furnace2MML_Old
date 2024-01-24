@@ -1,8 +1,8 @@
-Title: フライル
+Title: オリエンタル小春フライト (Oriental Early-Spring Flight)
 Composer: 毛玉の地下基地 (Kedama's underground base)
-
-This song is arrangement of U.N.オーエンは彼女なのか?(U.N. Owen was her?) 
-and 魔法少女達の百年祭(The Centennial Festival for Magical Girls) 
-from 東方紅魔郷(Touhou Koumakyou) ~ The Embodiment of Scarlet Devil.
+ 
+This song is arrangement of オリエンタルダークフライト(Oriental Dark Flight)
+and 春色小径(Spring Lane) ~ Colorful Path
+from 東方花映塚(Touhou Kaeidzuka) ~ Phantasmagoria of Flower View.
 
 Original MIDI file can be found at http://touhoumidihury.web.fc2.com/newfile.html 
