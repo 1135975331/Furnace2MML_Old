@@ -65,7 +65,7 @@ public static class CmdStreamToMMLUtil
         return songTotalTick - curCmd.Tick;
     }
     
-    public static StringBuilder GetMMLNote(int noteNum, int defaultOct)
+    public static StringBuilder GetMMLNote(int noteNum, ref int defaultOct, bool updateDefaultOct = true)
     {
         var sb         = new StringBuilder();
         var octave     = noteNum / 12;
@@ -76,6 +76,9 @@ public static class CmdStreamToMMLUtil
             case > 0: sb.Append(new string('>', octaveDiff)); break;
             case < 0: sb.Append(new string('<', -octaveDiff)); break;
         }
+        
+        if(updateDefaultOct)
+            defaultOct = octave;
 	    
         var pitchChar = pitch switch {
             0  => "c",
