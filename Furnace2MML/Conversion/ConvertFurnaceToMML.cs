@@ -83,16 +83,18 @@ public static class ConvertFurnaceToMML
 
                 // - => ignored
                 switch(cmdType) {
+                    case "HINT_ARP_TIME": ConvertCmdStreamToMML.SetArpSpeed(noteCmd); break;
+                    case "HINT_ARPEGGIO": ConvertCmdStreamToMML.SetArpeggioStatus(noteCmd); break;
                     case "INSTRUMENT":  ConvertCmdStreamToMML.ConvertInstrument(noteCmd, tickLen, orderSb[curOrderNum]); break; 
                     case "PANNING":     ConvertCmdStreamToMML.ConvertPanning(noteCmd, tickLen, orderSb[curOrderNum]); break;
                     case "HINT_VOLUME": ConvertCmdStreamToMML.ConvertVolume(noteCmd, tickLen, orderSb[curOrderNum]); break;
                     case "NOTE_ON":
-                        ConvertCmdStreamToMML.ConvertNoteOn(noteCmd, tickLen, prevOctave, orderSb[curOrderNum]);
-                        prevOctave = noteCmd.Value1 / 12;
+                        ConvertCmdStreamToMML.ConvertNoteOn(noteCmd, tickLen, ref prevOctave, orderSb[curOrderNum]);
+                        // prevOctave = noteCmd.Value1 / 12;
                         break;
                     case "NOTE_OFF": ConvertCmdStreamToMML.ConvertNoteOff(tickLen, orderSb[curOrderNum]); break;
-                    case "HINT_PORTA": ConvertCmdStreamToMML.ConvertPortamento(noteCmdCh, i, prevOctave, orderSb[curOrderNum]); 
-                        prevOctave = noteCmd.Value1 / 12;
+                    case "HINT_PORTA": ConvertCmdStreamToMML.ConvertPortamento(noteCmdCh, i, ref prevOctave, orderSb[curOrderNum]); 
+                        // prevOctave = noteCmd.Value1 / 12;
                         break;
                 }
             }
