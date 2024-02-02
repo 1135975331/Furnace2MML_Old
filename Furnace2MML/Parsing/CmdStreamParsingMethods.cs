@@ -17,10 +17,10 @@ public class CmdStreamParsingMethods
         var noteCmds = NoteCmds;
         var drumCmds = DrumCmds;
         
-        if(lastLine.Equals(">> END"))  // 마지막 줄이 >> END인 경우 중복이 발생하지 않으므로 아래 코드를 실행시키지 않는다
+        if(lastLine.Equals(">> END")) // 마지막 줄이 >> END인 경우 중복이 발생하지 않으므로 아래 코드를 실행시키지 않는다
             return;
         
-        var lastTick = int.MinValue;
+        var lastTick         = int.MinValue;
         var totalSkippedTick = PublicValue.OrderStartTicks[^1].TotalSkippedTick;
 		
         for(var chNum = 0; chNum < 9; chNum++) {
@@ -41,7 +41,7 @@ public class CmdStreamParsingMethods
         /* ---------------------- Local Function ------------------------ */
         void RemoveDuplication(List<FurnaceCommand> cmdList)
         {
-            var lastCmdTick = cmdList[^1].Tick;
+            var lastCmdTick     = cmdList[^1].Tick;
             var minTickPerOrder = TickPerUnitChanges.Min(tickPerUnit => tickPerUnit.TickPerOrder);
             
             if(lastCmdTick != 0 && (lastCmdTick+totalSkippedTick) % minTickPerOrder == 0)
@@ -81,22 +81,22 @@ public class CmdStreamParsingMethods
         {
             var cmdListLen = cmdList.Count;
             for(var i = 0; i < cmdListLen; i++) {
-                var curCmd = cmdList[i];
+                var curCmd         = cmdList[i];
                 var curCmdOrderNum = curCmd.OrderNum;
-                var nextOrderTick   = GetOrderStartTick(curCmdOrderNum + 1);
+                var nextOrderTick  = GetOrderStartTick(curCmdOrderNum + 1);
                 
                 if(isNoteCmd && curCmd.CmdType.Equals("NOTE_ON"))
                     continue;
                 if(curCmdOrderNum >= MaxOrderNum)
                     break;
                 
-                if(i != cmdListLen - 1) {  // 마지막 인덱스가 아닌 경우에는 현재 Cmd와 다음 Cmd의 Order가 서로 다를때만 NOTE_OFF삽입
-                    var nextCmd      = cmdList[i + 1];
+                if(i != cmdListLen - 1) { // 마지막 인덱스가 아닌 경우에는 현재 Cmd와 다음 Cmd의 Order가 서로 다를때만 NOTE_OFF삽입
+                    var nextCmd         = cmdList[i + 1];
                     var nextCmdOrderNum = nextCmd.OrderNum;
 
                     if(curCmdOrderNum >= nextCmdOrderNum) // curNoteOrderNum < nextNoteOrderNum 인 경우 아래 코드 실행
                         continue;
-                    if(nextCmd.Tick == GetOrderStartTick(curCmdOrderNum+1))  // 다음 Order가 시작하는 틱에 Cmd가 있는 경우
+                    if(nextCmd.Tick == GetOrderStartTick(curCmdOrderNum+1)) // 다음 Order가 시작하는 틱에 Cmd가 있는 경우
                         continue;
                 }
 
@@ -116,54 +116,63 @@ public class CmdStreamParsingMethods
         var noteCmds = NoteCmds;
         
         for(var chNum = 0; chNum < 9; chNum++) {
-            var noteCmdCh    = noteCmds[chNum];
-            var noteCmdChLen = noteCmdCh.Count;
+            var noteCmdChList    = noteCmds[chNum];
+            var noteCmdChLen = noteCmdChList.Count;
             if(noteCmdChLen == 0)
                 continue;
 
             var curTick     = -1;
-            var cmdToRemove = new List<FurnaceCommand>();
+            var cmdsToRemove = new List<FurnaceCommand>();
             
             var hintPortaFound  = false;
             var prePortaFound   = false;
             var hintLegatoFound = false;
             
             for(var i = 0; i < noteCmdChLen - 1; i++) {
-                var curCmd = noteCmdCh[i];
+                var curCmd = noteCmdChList[i];
                 if(curTick != curCmd.Tick) { // 틱이 바뀌면 초기화
                     hintPortaFound  = false;
                     prePortaFound   = false;
                     hintLegatoFound = false;
                     curTick         = curCmd.Tick;
-                    cmdToRemove.Clear();
+                    cmdsToRemove.Clear();
                 }
 
                 switch(curCmd.CmdType) {
                     case "HINT_PORTA":  
                         hintPortaFound = true; 
-                        cmdToRemove.Add(curCmd);
+                        if(curCmd.Value2 == 0)  // If Value2 of the HINT_PORTA is 0, it's useless
+                            RemoveCmd(curCmd, noteCmdChList, ref noteCmdChLen);
+                        else
+                            cmdsToRemove.Add(curCmd);
                         break;
                     case "PRE_PORTA": 
                         prePortaFound = true;
-                        cmdToRemove.Add(curCmd);
+                        RemoveCmd(curCmd, noteCmdChList, ref noteCmdChLen);
                         break;
                     case "HINT_LEGATO":
                         hintLegatoFound = true;
-                        cmdToRemove.Add(curCmd);
+                        cmdsToRemove.Add(curCmd);
                         break;
                 }
                 
                 
                 if(hintPortaFound && prePortaFound && hintLegatoFound) { // 같은 틱 내에 해당 3개의 명령이 모두 발견된 경우 Portamento 관련 명령 모두 삭제
-                    foreach(var cmd in cmdToRemove)
-                        noteCmdCh.Remove(cmd);
+                    foreach(var cmd in cmdsToRemove)
+                        RemoveCmd(cmd, noteCmdChList, ref noteCmdChLen);
                     
-                    noteCmdChLen -= cmdToRemove.Count;
-                    i            =  GetNextTickIdx(noteCmdCh, curTick, out _) - 1;
+                    i = GetNextTickIdx(noteCmdChList, curTick, out _) - 1;
                 }
-
                 //  같은 틱 내에 HINT_PORTA, PRE_PORTA, HINT_LEGATO가 모두 발견되는 경우
                 //  해당 틱 내의 세 명령어를 모두 삭제함
+                
+                #region Local Functions
+                void RemoveCmd(FurnaceCommand cmdToBeRemoved, List<FurnaceCommand> cmdList, ref int cmdListLen)
+                {
+                    cmdList.Remove(cmdToBeRemoved);
+                    cmdListLen -= 1;
+                }
+                #endregion
             }
         }
     }
