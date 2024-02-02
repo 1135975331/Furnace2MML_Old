@@ -15,7 +15,8 @@ using Application = System.Windows.Application;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 
-// todo 프로그래스바
+// todo Progressbar
+// todo Document
 
 namespace FurnaceCommandStream2MML;
 
@@ -27,10 +28,6 @@ public partial class MainWindow : Window
     public string CmdFilePath;
     public string TxtOutFilePath;
     public StreamReader Sr;
-
-    private int startTime;
-    private int parsingFinishTime;
-    private int convertingFinishTime;
 
     public MainWindow()
     {
@@ -47,8 +44,8 @@ public partial class MainWindow : Window
         // GetFilePaths(testFilesDirPath + @"\hurairu\hurairu_txt.txt", OutputFileType.TXT_OUTPUT);
         // GetFilePaths(testFilesDirPath + @"\tuya\tuya_cmd.txt", OutputFileType.CMD_STREAM);
         // GetFilePaths(testFilesDirPath + @"\tuya\tuya_txt.txt", OutputFileType.TXT_OUTPUT);
-        GetFilePaths($@"{testFilesDirPath}\okf\okf_cmd.txt", OutputFileType.CMD_STREAM);
-        GetFilePaths($@"{testFilesDirPath}\okf\okf_txt.txt", OutputFileType.TXT_OUTPUT);
+        // GetFilePaths($@"{testFilesDirPath}\okf\okf_cmd.txt", OutputFileType.CMD_STREAM);
+        // GetFilePaths($@"{testFilesDirPath}\okf\okf_txt.txt", OutputFileType.TXT_OUTPUT);
         StartConvert();
 		#endif
     }
