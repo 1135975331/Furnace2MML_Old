@@ -66,6 +66,7 @@ public static class ConvertCmdStreamToMML
             curOrderSb.Append('r').AppendFracLength(tickLen);
     }
 
+    private const int TICK_OF_FRAC1 = 96;
     public static void ConvertPortamento(List<FurnaceCommand> cmdList, int curCmdIdx, ref int defaultOct,  StringBuilder curOrderSb)
     {
         var curCmd = cmdList[curCmdIdx];
@@ -74,24 +75,50 @@ public static class ConvertCmdStreamToMML
         if(curCmd.Value1 == -1)
             return;
 
-        // var prevCmd = CmdStreamToMMLUtil.GetFirstCertainCmd(cmdList, curCmdIdx, ["PRE_PORTA"], "backward", true);  
         var prevCmd = CmdStreamToMMLUtil.GetFirstCertainCmd(cmdList, curCmdIdx, ["HINT_PORTA", "NOTE_ON"], "backward");  
-        var nextCmd = cmdList[curCmdIdx+1];
-
-        var isEndOfPorta     = nextCmd.CmdType.EqualsAny("HINT_LEGATO", "NOTE_OFF");
-        var nextCmdForLength = CmdStreamToMMLUtil.GetFirstCertainCmd(cmdList, curCmdIdx, isEndOfPorta ? ["NOTE_ON", "NOTE_OFF"] : ["HINT_PORTA"], "forward");
-
-        var prevMMLNote = CmdStreamToMMLUtil.GetMMLNote(prevCmd.Value1, ref defaultOct, false); 
-        var curMMLNote  = CmdStreamToMMLUtil.GetMMLNote(curCmd.Value1, ref defaultOct, true);
         
-        var tickOfFrac1    = CmdStreamToMMLUtil.ConvertBetweenTickAndFraction(1);
+        var nextCmdForLength = CmdStreamToMMLUtil.GetFirstCertainCmd(cmdList, curCmdIdx, ["NOTE_ON", "NOTE_OFF", "HINT_PORTA", "HINT_LEGATO"], "forward");
+        
         var portaLength    = nextCmdForLength.Tick - curCmd.Tick;
-        var isPortaLenLong = portaLength > tickOfFrac1;
-        
-        if(isPortaLenLong)
-            curOrderSb.Append($"&{{{prevMMLNote} {curMMLNote}}}").AppendFracLength(tickOfFrac1).Append($"&{curMMLNote.ToString().Trim(['<', '>'])}").AppendFracLength(portaLength - tickOfFrac1);
-        else
+        var isPortaLenLong = portaLength > TICK_OF_FRAC1;
+
+        // Length of Portamento cannot be longer than a whole note + a quarter note(fracLen: 1 + 4), so it should be split into parts.
+        if(isPortaLenLong) {
+            FormatSplitLongPortamento(ref defaultOct);
+        } else {
+            var prevMMLNote = CmdStreamToMMLUtil.GetMMLNote(prevCmd.Value1, ref defaultOct, false); 
+            var curMMLNote  = CmdStreamToMMLUtil.GetMMLNote(curCmd.Value1, ref defaultOct, true);
             curOrderSb.Append($"&{{{prevMMLNote} {curMMLNote}}}").AppendFracLength(portaLength);
+        }
+        
+        #region Local Functions
+        /* -------------------------------------- Local Functions -------------------------------------------- */
+        void FormatSplitLongPortamento(ref int defaultOct)
+        {
+            var portaLenInFrac1 = (double)portaLength / TICK_OF_FRAC1;
+            var splitCount = (int)Math.Ceiling(portaLenInFrac1);
+            var deltaNoteNum = curCmd.Value1 - prevCmd.Value1;
+            var deltaNoteNumPerFrac1 = (1 / portaLenInFrac1) * deltaNoteNum;
+
+            var prevNoteNum = prevCmd.Value1;
+            var curNoteNum  = prevCmd.Value1;
+            
+            for(var i = 1; i <= splitCount; i++) {
+                if(i != splitCount)
+                    curNoteNum += (int)Math.Round(deltaNoteNumPerFrac1);
+                else
+                    curNoteNum = curCmd.Value1;
+
+                var prevMMLNote = CmdStreamToMMLUtil.GetMMLNote(prevNoteNum, ref defaultOct, false); 
+                var curMMLNote  = CmdStreamToMMLUtil.GetMMLNote(curNoteNum, ref defaultOct, true);
+
+                var length = i == splitCount ? portaLength % TICK_OF_FRAC1 : TICK_OF_FRAC1;
+                curOrderSb.Append($"&{{{prevMMLNote} {curMMLNote}}}").AppendFracLength(length);
+
+                prevNoteNum = curNoteNum;
+            }
+        }
+        #endregion
     }
     
 
