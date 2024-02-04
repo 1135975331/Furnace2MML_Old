@@ -21,6 +21,20 @@ public static partial class Util
 	public static string ToEscapedString(this string origin)
 		=> origin.Replace(@"\", @"\\");
     
+	/// <summary>
+	/// Remove method for optimized for loop
+	/// </summary>
+	/// <param name="list"></param>
+	/// <param name="elem"></param>
+	/// <param name="listLen"></param>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
+    public static bool Remove<T>(this List<T> list, T elem, ref int listLen)
+    {
+        listLen -= 1;
+        return list.Remove(elem);
+    }
+
 	// Referenced code from: https://stackoverflow.com/questions/10293236/accessing-the-scrollviewer-of-a-listbox-from-c-sharp
 	public static Visual GetDescendantByType(Visual element, Type type)
 	{
