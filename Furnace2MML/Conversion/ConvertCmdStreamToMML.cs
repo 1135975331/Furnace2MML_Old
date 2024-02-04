@@ -120,10 +120,17 @@ public static class ConvertCmdStreamToMML
         }
         #endregion
     }
+
+    public static void ConvertLegato(FurnaceCommand cmd, int tickLen, ref int defaultOct, FurnaceCommand prevCmd, StringBuilder curOrderSb)
+    {
+        var noteNum = cmd.Value1 + 12;  // noteNum of HINT_LEGATO is 1 octave lower than noteNum of prevCmd
+        var mmlNote = CmdStreamToMMLUtil.GetMMLNote(noteNum, ref defaultOct).ToString();
+        
+        var isPrevCmdPorta = prevCmd.CmdType.Equals("HINT_PORTA");
+        curOrderSb.Append(isPrevCmdPorta ? "&" : "&&").Append(mmlNote).AppendFracLength(tickLen);
+    }
     
-
-
-
+    
 
     public static int ConvertTickrateToTempo(double tickrate)
     {
