@@ -65,6 +65,7 @@ public static class ConvertFurnaceToMML
             // if(DefaultNoteFractionLength != -1)
             // orderSb[0].Append('l').Append(DefaultNoteFractionLength).Append("   ");
 
+            var prevNoteCmd = new FurnaceCommand(-1, byte.MaxValue, byte.MaxValue, "INVALID", -1, -1);
             var prevNoteCmdOrderNum = -1;
 
             var noteCmdChLen = noteCmdCh.Count;
@@ -85,24 +86,16 @@ public static class ConvertFurnaceToMML
                 switch(cmdType) {
                     case "HINT_ARP_TIME": ConvertCmdStreamToMML.SetArpSpeed(noteCmd); break;
                     case "HINT_ARPEGGIO": ConvertCmdStreamToMML.SetArpeggioStatus(noteCmd); break;
-                    case "INSTRUMENT":  ConvertCmdStreamToMML.ConvertInstrument(noteCmd, tickLen, orderSb[curOrderNum]); break; 
-                    case "PANNING":     ConvertCmdStreamToMML.ConvertPanning(noteCmd, tickLen, orderSb[curOrderNum]); break;
-                    case "HINT_VOLUME": ConvertCmdStreamToMML.ConvertVolume(noteCmd, tickLen, orderSb[curOrderNum]); break;
-                    case "NOTE_ON":
-                        ConvertCmdStreamToMML.ConvertNoteOn(noteCmd, tickLen, ref prevOctave, orderSb[curOrderNum]);
-                        // prevOctave = noteCmd.Value1 / 12;
-                        break;
-                    case "NOTE_OFF": ConvertCmdStreamToMML.ConvertNoteOff(tickLen, orderSb[curOrderNum]); break;
-                    case "HINT_PORTA": ConvertCmdStreamToMML.ConvertPortamento(noteCmdCh, i, ref prevOctave, orderSb[curOrderNum]); 
-                        // prevOctave = noteCmd.Value1 / 12;
-                        break;
                     case "INSTRUMENT":    ConvertCmdStreamToMML.ConvertInstrument(noteCmd, tickLen, orderSb[curOrderNum]); break; 
                     case "PANNING":       ConvertCmdStreamToMML.ConvertPanning(noteCmd, tickLen, orderSb[curOrderNum]); break;
                     case "HINT_VOLUME":   ConvertCmdStreamToMML.ConvertVolume(noteCmd, tickLen, orderSb[curOrderNum]); break;
                     case "NOTE_ON":       ConvertCmdStreamToMML.ConvertNoteOn(noteCmd, tickLen, ref prevOctave, orderSb[curOrderNum]); break;
                     case "NOTE_OFF":      ConvertCmdStreamToMML.ConvertNoteOff(tickLen, orderSb[curOrderNum]); break;
                     case "HINT_PORTA":    ConvertCmdStreamToMML.ConvertPortamento(noteCmdCh, i, ref prevOctave, orderSb[curOrderNum]); break;
+                    case "HINT_LEGATO":   ConvertCmdStreamToMML.ConvertLegato(noteCmd, tickLen, ref prevOctave, prevNoteCmd, orderSb[curOrderNum]); break;
                 }
+                
+                prevNoteCmd = noteCmd;
             }
 
             for(var i = 0; i <= MaxOrderNum; i++)
