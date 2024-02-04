@@ -53,6 +53,10 @@ public struct FurnaceCommand(int tick, byte orderNum, byte channel, string cmdTy
     public int Value1 = value1;
     public readonly int Value2 = value2;
 
+    //  Copy otherCmd except tick
+    public FurnaceCommand(int tick, FurnaceCommand otherCmd) : this(otherCmd.Tick, otherCmd.OrderNum, otherCmd.Channel, otherCmd.CmdType, otherCmd.Value1, otherCmd.Value2)
+        => Tick = tick;
+
     public override string ToString()
         => $"{Channel:00} | {OrderNum:X2} {Tick}: [{Value1:X2}({Value1:000}) {Value2:X2}({Value2:000}) {CmdType}]";
         // => $"[{Tick} {Channel} {CmdType} {Value1} {Value2}]";
