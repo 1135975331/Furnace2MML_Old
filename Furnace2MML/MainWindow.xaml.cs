@@ -302,6 +302,8 @@ public partial class MainWindow : Window
 
         cmdStreamParser.InsertNoteOffAtStartOfEachOrder();
         cmdStreamParser.RemoveUselessPortamentoCommands();
+        cmdStreamParser.FixRetriggerCommands();
+        cmdStreamParser.ReorderCommands();
 #if RELEASE
         } catch(Exception e) {
             var errMsg = $"An error has occured while parsing the command stream at line {curReadingLineNum}.\n\nStackTrace: {e.StackTrace}\n\nMsg: {e.Message}\n\n\n\n";
