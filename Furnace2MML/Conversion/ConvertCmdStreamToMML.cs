@@ -13,10 +13,9 @@ public static class ConvertCmdStreamToMML
     public static void SetArpeggioStatus(FurnaceCommand cmd)
         => _arpValue = (byte)cmd.Value1;
 
-    private static int prevNoteOnValue = -1;
     public static void ConvertNoteOn(FurnaceCommand cmd, int tickLen, ref int defaultOct, StringBuilder curOrderSb)
     {
-        var noteNum = cmd.Value1 < 0 ? prevNoteOnValue : cmd.Value1;
+        var noteNum = cmd.Value1;
         var mmlNote = CmdStreamToMMLUtil.GetMMLNote(noteNum, ref defaultOct);
 
         if(_arpValue == 0) {
@@ -27,8 +26,6 @@ public static class ConvertCmdStreamToMML
             var fracLenSpeed = CmdStreamToMMLUtil.ConvertBetweenTickAndFraction(_arpTickSpeed);
             curOrderSb.Append($"{{{{{mmlNote}{arpNote1}{arpNote2}}}}}").AppendFracLength(tickLen).Append($",{fracLenSpeed}");
         }
-        
-        prevNoteOnValue = noteNum;
     }
 
     public static void ConvertNoteOff(int tickLen, StringBuilder curOrderSb)
