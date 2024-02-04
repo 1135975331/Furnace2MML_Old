@@ -169,18 +169,6 @@ public class CmdStreamParsingMethods
                 }
                 //  같은 틱 내에 HINT_PORTA, PRE_PORTA, HINT_LEGATO가 모두 발견되는 경우
                 //  해당 틱 내의 세 명령어를 모두 삭제함
-                
-                #region Local Functions
-                void RemoveCmd(FurnaceCommand cmdToBeRemoved, List<FurnaceCommand> cmdList, ref int cmdListLen)
-                {
-                    cmdList.Remove(cmdToBeRemoved);
-                    cmdListLen -= 1;
-                }
-                #endregion
-            }
-        }
-    }
-            }
             }
         }
         return;
