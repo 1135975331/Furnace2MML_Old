@@ -233,6 +233,17 @@ public class CmdStreamParsingMethods
         }
     }
 
+    public void ReorderCommands()  
+    {
+        var noteCmds = NoteCmds;
+        
+        for(var chNum = 0; chNum < 9; chNum++) {
+            var noteCmdChList = noteCmds[chNum];
+            var noteCmdChLen  = noteCmdChList.Count;
+            if(noteCmdChLen == 0)
+                continue;
+
+            noteCmdChList.Sort();
         }
     }
 }
