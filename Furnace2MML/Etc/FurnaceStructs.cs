@@ -43,7 +43,7 @@ public struct SubsongData()
 /// <summary>
 /// Note On/Off, Portamento, Volume, Panning, etc.
 /// </summary>
-public struct FurnaceCommand(int tick, byte orderNum, byte channel, string cmdType, int value1, int value2)
+public struct FurnaceCommand(int tick, byte orderNum, byte channel, string cmdType, int value1, int value2) : IComparable<FurnaceCommand>
 {
     public readonly int Tick = tick;
     public readonly byte OrderNum = orderNum;  // OrderNum cannot be 0xFF(255)
@@ -59,7 +59,27 @@ public struct FurnaceCommand(int tick, byte orderNum, byte channel, string cmdTy
 
     public override string ToString()
         => $"{Channel:00} | {OrderNum:X2} {Tick}: [{Value1:X2}({Value1:000}) {Value2:X2}({Value2:000}) {CmdType}]";
-        // => $"[{Tick} {Channel} {CmdType} {Value1} {Value2}]";
+    // => $"[{Tick} {Channel} {CmdType} {Value1} {Value2}]";
+    public int CompareTo(FurnaceCommand other)
+    {
+        var tickComparison = Tick.CompareTo(other.Tick);
+        return tickComparison != 0 ? tickComparison : GetCmdTypeOrderPriority(CmdType).CompareTo(GetCmdTypeOrderPriority(other.CmdType));
+    }
+
+    /// <summary>
+    /// A larger value will be ordered at the back of the array
+    /// </summary>
+    /// <param name="cmdType"></param>
+    /// <returns></returns>
+    private static int GetCmdTypeOrderPriority(string cmdType)
+    {
+        return cmdType switch {
+            "NOTE_ON"    => 3,
+            "NOTE_OFF"   => 3,
+            "HINT_PORTA" => 2,
+            _            => 1,
+        };
+    }
 }
 
 
