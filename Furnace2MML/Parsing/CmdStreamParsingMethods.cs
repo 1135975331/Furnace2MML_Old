@@ -1,4 +1,5 @@
 ﻿using FurnaceCommandStream2MML.Etc;
+using FurnaceCommandStream2MML.Utils;
 using static FurnaceCommandStream2MML.Etc.PublicValue;
 using static FurnaceCommandStream2MML.Utils.CmdStreamToMMLUtil;
 namespace Furnace2MML.Parsing;
@@ -111,7 +112,7 @@ public class CmdStreamParsingMethods
     /// <summary>
     /// 
     /// </summary>
-    public void RemoveUselessPortamentoCommands()
+    public void RemoveUselessPortamentoCommands() 
     {
         var noteCmds = NoteCmds;
         
@@ -140,26 +141,29 @@ public class CmdStreamParsingMethods
 
                 switch(curCmd.CmdType) {
                     case "HINT_PORTA":  
-                        hintPortaFound = true; 
-                        if(curCmd.Value2 == 0)  // If Value2 of the HINT_PORTA is 0, it's useless
-                            RemoveCmd(curCmd, noteCmdChList, ref noteCmdChLen);
-                        else
+                        hintPortaFound = true;
+                        if(curCmd.Value2 == 0) { // If Value2 of the HINT_PORTA is 0, it's useless
+                            noteCmdChList.Remove(curCmd, ref noteCmdChLen); i--;
+                        } else
                             cmdsToRemove.Add(curCmd);
                         break;
                     case "PRE_PORTA": 
                         prePortaFound = true;
-                        RemoveCmd(curCmd, noteCmdChList, ref noteCmdChLen);
+                        noteCmdChList.Remove(curCmd, ref noteCmdChLen); i--;
                         break;
                     case "HINT_LEGATO":
                         hintLegatoFound = true;
-                        cmdsToRemove.Add(curCmd);
+                        if(IsUnnecessaryLegatoCmd(noteCmdChList, i)) { // If Value2 of the HINT_PORTA is 0, it's useless
+                            noteCmdChList.Remove(curCmd, ref noteCmdChLen); i--;
+                        } else
+                            cmdsToRemove.Add(curCmd);
                         break;
                 }
                 
                 
                 if(hintPortaFound && prePortaFound && hintLegatoFound) { // 같은 틱 내에 해당 3개의 명령이 모두 발견된 경우 Portamento 관련 명령 모두 삭제
                     foreach(var cmd in cmdsToRemove)
-                        RemoveCmd(cmd, noteCmdChList, ref noteCmdChLen);
+                        noteCmdChList.Remove(cmd, ref noteCmdChLen);
                     
                     i = GetNextTickIdx(noteCmdChList, curTick, out _) - 1;
                 }
@@ -176,5 +180,8 @@ public class CmdStreamParsingMethods
             }
         }
     }
+            }
+        }
+        return;
     
 }
