@@ -49,7 +49,7 @@ public static class ConvertCmdStreamToMML
     {
         // Conversion Warning: Valid Instrument Type of SSG Channel is @0 ~ @9.
         if(cmd.Channel is >= 6 and <= 8 && cmd.Value1 is not (>= 0 and <= 9)) {
-            ((MainWindow)Application.Current.MainWindow!).LogTextBox.AppendText($"Warning: Invalid instrument type for SSG Channel found.\nValid instrument type of SSG Channel is @0 ~ @9.\n[Channel: {cmd.Channel}, Tick: {cmd.Tick}]\n");
+            ((MainWindow)Application.Current.MainWindow!).LogTextBox.AppendText($"Warning: Invalid instrument type for SSG Channel found.\nValid instrument type of SSG Channel is @0 ~ @9.\n[Channel: {cmd.Channel}, Order: {cmd.OrderNum:X2}, Tick: {cmd.Tick}]\n");
             cmd.Value1 = 0;
         }
 
