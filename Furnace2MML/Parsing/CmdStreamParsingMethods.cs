@@ -181,7 +181,38 @@ public class CmdStreamParsingMethods
         }
     }
             }
+            }
         }
         return;
-    
+        
+        #region Local Functions
+        /* --------------------------------- Local Functions ------------------------------------- */
+        bool IsUnnecessaryLegatoCmd(List<FurnaceCommand> cmdList, int curIdx)
+        {
+            var noteOnFound = false;
+            var hintPortaFound = false;
+            for(var i=curIdx-1; i>=0; i--) {
+                var cmd = cmdList[i];
+                
+                switch(cmd.CmdType) {
+                    case "NOTE_ON":
+                        noteOnFound = true;
+                        break;
+                    case "HINT_PORTA":
+                        hintPortaFound = true;
+                        break;
+                    case "NOTE_OFF" when (!hintPortaFound):
+                        return true;
+                }
+
+                if(noteOnFound || hintPortaFound)
+                    return false;
+            }
+            
+            return false;
+        }
+        #endregion
+    }
+        }
+    }
 }
